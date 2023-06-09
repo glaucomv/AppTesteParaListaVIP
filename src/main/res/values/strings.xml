@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AppTesteParaListaVIP</string>
+    <string name="app_de_teste_para_a_listavip">APP de teste para a ListaVIP</string>
+    <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="parentesco_pai_m_e_filho">Parentesco (pai, mãe, filho,...)</string>
+    <string name="telefone">Telefone</string>
+    <string name="limpar">LIMPAR</string>
+    <string name="salvar">SALVAR</string>
+    <string name="finalizar">FINALIZAR</string>
+</resources>
