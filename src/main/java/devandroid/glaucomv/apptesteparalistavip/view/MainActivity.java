@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import devandroid.glaucomv.apptesteparalistavip.R;
 import devandroid.glaucomv.apptesteparalistavip.model.Pessoa;
@@ -50,12 +51,33 @@ public class MainActivity extends AppCompatActivity {
         editTextParentesco.setText(pessoa.getParentesco());
         editTextTelefone.setText(pessoa.getTelefone());
 
+        buttonLimpar.setOnClickListener(view -> {
+            editTextNome.setText("");
+            editTextSobrenome.setText("");
+            editTextParentesco.setText("");
+            editTextTelefone.setText("");
+        });
+        buttonFinalizar.setOnClickListener(view -> {
+            Toast.makeText(MainActivity.this, "Volte Sempre!!!", Toast.LENGTH_LONG).show();
+            finish();
+        });
+        buttonSalvar.setOnClickListener(view -> {
+
+            pessoa.setNome(editTextNome.getText().toString());
+            pessoa.setSobrenome(editTextSobrenome.getText().toString());
+            pessoa.setParentesco(editTextParentesco.getText().toString());
+            pessoa.setTelefone(editTextTelefone.getText().toString());
+
+            Toast.makeText(MainActivity.this, pessoa.toString(), Toast.LENGTH_LONG).show();
+
+        });
+
         dadosPessoa = pessoa.getNome();
         dadosPessoa = pessoa.getSobrenome();
         dadosPessoa = pessoa.getParentesco();
         dadosPessoa = pessoa.getTelefone();
 
-        Log.i("POOAndroid",pessoa.toString());
+        Log.i("POOAndroid", pessoa.toString());
 
     }
 }

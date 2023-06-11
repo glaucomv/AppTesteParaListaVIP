@@ -13,7 +13,8 @@ public class Pessoa {
     private String parentesco;
     private String telefone;
 
-    public Pessoa(){}
+    public Pessoa() {
+    }
 
     public String getNome() {
         return nome;
