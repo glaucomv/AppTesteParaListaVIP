@@ -69,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonFinalizar.setOnClickListener(view -> {
-            Toast.makeText(MainActivity.this, "Volte Sempre!!!", Toast.LENGTH_LONG).show();
-            finish();
-            controller.finalizar();
-        });
         buttonSalvar.setOnClickListener(view -> {
 
             pessoa.setNome(editTextNome.getText().toString());
@@ -82,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             pessoa.setTelefone(editTextTelefone.getText().toString());
 
             Toast.makeText(MainActivity.this, pessoa.toString(), Toast.LENGTH_LONG).show();
-
 
             controller.salvar(pessoa);
         });
@@ -93,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         dadosPessoa = pessoa.getTelefone();
 
         Log.i("POOAndroid", pessoa.toString());
+
+        buttonFinalizar.setOnClickListener(view -> controller.finalizar(MainActivity.this));
 
     }
 }

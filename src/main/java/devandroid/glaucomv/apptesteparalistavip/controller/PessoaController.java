@@ -1,6 +1,7 @@
 package devandroid.glaucomv.apptesteparalistavip.controller;
 
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import devandroid.glaucomv.apptesteparalistavip.model.Pessoa;
 import devandroid.glaucomv.apptesteparalistavip.view.MainActivity;
@@ -45,7 +46,9 @@ public class PessoaController {
 
     }
 
-    public void finalizar() {
-    }
+    public void finalizar(MainActivity activity) {
+        Toast.makeText(activity, "Volte Sempre", Toast.LENGTH_LONG).show();
+        activity.finish();
 
+    }
 }
