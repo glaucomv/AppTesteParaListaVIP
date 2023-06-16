@@ -16,10 +16,6 @@ import devandroid.glaucomv.apptesteparalistavip.model.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences preferences;
-    SharedPreferences.Editor listateste;
-    public static final String NOME_PREFERENCES = "pref_testelistavip";
-
     PessoaController controller;
 
     Pessoa pessoa;
@@ -40,16 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preferences = getSharedPreferences(NOME_PREFERENCES,0);
-        listateste = preferences.edit();
-
-        controller = new PessoaController();
+        controller = new PessoaController(MainActivity.this);
 
         pessoa = new Pessoa();
-        pessoa.setNome(preferences.getString("Nome",""));
-        pessoa.setSobrenome(preferences.getString("Sobrenome",""));
-        pessoa.setParentesco(preferences.getString("Parentesco",""));
-        pessoa.setTelefone(preferences.getString("Telefone",""));
+        controller.buscar(pessoa);
 
         editTextNome = findViewById(R.id.editTextNome);
         editTextSobrenome = findViewById(R.id.editTextSobrenome);
@@ -73,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 editTextParentesco.setText("");
                 editTextTelefone.setText("");
 
-                listateste.clear();
-                listateste.apply();
 
                 controller.limpar();
 
@@ -95,11 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(MainActivity.this, pessoa.toString(), Toast.LENGTH_LONG).show();
 
-            listateste.putString("Nome",pessoa.getNome());
-            listateste.putString("Sobrenome",pessoa.getSobrenome());
-            listateste.putString("Parentesco",pessoa.getParentesco());
-            listateste.putString("Telefone",pessoa.getTelefone());
-            listateste.apply();
 
             controller.salvar(pessoa);
         });
