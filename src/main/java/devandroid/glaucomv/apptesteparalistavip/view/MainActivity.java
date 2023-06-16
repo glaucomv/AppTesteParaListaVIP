@@ -2,16 +2,21 @@ package devandroid.glaucomv.apptesteparalistavip.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import devandroid.glaucomv.apptesteparalistavip.R;
+import devandroid.glaucomv.apptesteparalistavip.controller.PessoaController;
 import devandroid.glaucomv.apptesteparalistavip.model.Pessoa;
 
 public class MainActivity extends AppCompatActivity {
+
+    PessoaController controller;
 
     Pessoa pessoa;
 
@@ -31,35 +36,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        controller = new PessoaController(MainActivity.this);
+
         pessoa = new Pessoa();
-        pessoa.setNome("Marco");
-        pessoa.setSobrenome("Maddo");
-        pessoa.setParentesco("Pai");
-        pessoa.setTelefone("21985655847");
+        controller.buscar(pessoa);
 
         editTextNome = findViewById(R.id.editTextNome);
         editTextSobrenome = findViewById(R.id.editTextSobrenome);
         editTextParentesco = findViewById(R.id.editTextParentesco);
         editTextTelefone = findViewById(R.id.editTextTelefone);
 
-        buttonLimpar = findViewById(R.id.buttonLimpar);
-        buttonSalvar = findViewById(R.id.buttonSalvar);
-        buttonFinalizar = findViewById(R.id.buttonFinalizar);
-
         editTextNome.setText(pessoa.getNome());
         editTextSobrenome.setText(pessoa.getSobrenome());
         editTextParentesco.setText(pessoa.getParentesco());
         editTextTelefone.setText(pessoa.getTelefone());
 
-        buttonLimpar.setOnClickListener(view -> {
-            editTextNome.setText("");
-            editTextSobrenome.setText("");
-            editTextParentesco.setText("");
-            editTextTelefone.setText("");
+        buttonLimpar = findViewById(R.id.buttonLimpar);
+        buttonSalvar = findViewById(R.id.buttonSalvar);
+        buttonFinalizar = findViewById(R.id.buttonFinalizar);
+
+        buttonLimpar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextNome.setText("");
+                editTextSobrenome.setText("");
+                editTextParentesco.setText("");
+                editTextTelefone.setText("");
+
+
+                controller.limpar();
+
+            }
         });
+
         buttonFinalizar.setOnClickListener(view -> {
             Toast.makeText(MainActivity.this, "Volte Sempre!!!", Toast.LENGTH_LONG).show();
             finish();
+            controller.finalizar();
         });
         buttonSalvar.setOnClickListener(view -> {
 
@@ -70,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(MainActivity.this, pessoa.toString(), Toast.LENGTH_LONG).show();
 
+
+            controller.salvar(pessoa);
         });
 
         dadosPessoa = pessoa.getNome();
